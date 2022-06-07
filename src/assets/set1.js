@@ -6,15 +6,21 @@ import river_corner from './set1/river_corner.png'
 import river_line from './set1/river_line.png'
 import grass_edge from './set1/grass_edge.png'
 
+// export const set1Names = [
+//     'grass',
+//     'forest',
+//     'forest_edge',
+//     'forest_line',
+//     'river_corner',
+//     'river_line',
+//     'grass_edge'
+// ]
+
 export const set1Names = [
-    'grass',
-    'forest',
-    'forest_edge',
-    'forest_line',
-    'river_corner',
-    'river_line',
-    'grass_edge'
-]
+        'grass',
+        'river_corner',
+        'river_line'
+    ]
 
 export const set1List = new Map([
 	['grass', {
@@ -35,35 +41,35 @@ export const set1List = new Map([
         top: 0,
         bot: 2,
         right: 0,
-        left: 2,
+        left: 3,
         img: forest_edge
 	}],
 	['forest_line', {
-        top: 4,
-        bot: 4,
+        top: 2,
+        bot: 3,
         right: 0,
         left: 1,
         img: forest_line
 	}],
+	['grass_edge', {
+        top: 1,
+        bot: 3,
+        right: 1,
+        left: 2,
+        img: grass_edge
+	}],
 	['river_corner', {
         top: 0,
-        bot: 4,
+        bot: 5,
         right: 0,
-        left: 4,
+        left: 5,
         img: river_corner
 	}],
 	['river_line', {
-        top: 4,
-        bot: 4,
+        top: 5,
+        bot: 5,
         right: 0,
         left: 0,
         img: river_line
-	}],
-	['grass_edge', {
-        top: 1,
-        bot: 4,
-        right: 4,
-        left: 1,
-        img: grass_edge
 	}]
 ]);

@@ -11,7 +11,8 @@ class MainBlock extends Component {
     state = {
         N: 5,
         selected: 'grass',
-        matrixBlock: []
+        matrixBlock: [],
+        isClicked: false,
     }
 
     constructor(props) {
@@ -27,7 +28,8 @@ class MainBlock extends Component {
         
         this.state = {
             matrixBlock: matrixBlock,
-            N: props.N
+            N: props.N,
+            isClicked: false,
         }
     }
 
@@ -108,11 +110,12 @@ class MainBlock extends Component {
     }
 
     mathAllSides(x, y, block) {
-        for (var i = 0;i < 3;i++) {
+        for (var i = 0;i < 4;i++) {
             if (this.matchOneSide(x, y, block)) {
                 return true;
             }
-            block.rotate90();
+            if (i < 3)
+                block.rotate90();
         }
         return false;
     }
@@ -142,11 +145,12 @@ class MainBlock extends Component {
     }
 
     clickOnBlock(x, y, selected) {
-        if (selected !== undefined) {
+        if (selected !== undefined && this.state.isClicked === false) {
             var matrixBlock = this.state.matrixBlock;
             matrixBlock[y][x] = new WaveItem(selected, set1List.get(selected).img
                                 ,set1List.get(selected).top, set1List.get(selected).bot, set1List.get(selected).right, set1List.get(selected).left);
             this.setState({
+                isClicked: true,
                 matrixBlock: matrixBlock,
             })
             this.waveFunctionCollapse(x, y, matrixBlock);
