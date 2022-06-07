@@ -1,0 +1,4 @@
+.item-container {
+    display: block;
+    flex-grow: 1;
+}

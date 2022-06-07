@@ -1,0 +1,8 @@
+
+.items-containers {
+    display: flex;
+    flex-direction: line;
+    margin-top: 20px;
+    width: 700px;
+    justify-content: center;
+}
