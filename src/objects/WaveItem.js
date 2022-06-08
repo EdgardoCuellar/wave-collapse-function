@@ -1,4 +1,7 @@
 import { set1Names, set1List} from "../assets/set1";
+import { set2Names, set2List} from "../assets/set2";
+
+const ACTUAL_SET = 2;
 
 class WaveItem {
 
@@ -56,7 +59,19 @@ class WaveItem {
     }
 
     rotate90() {
-        var setItem = set1List.get(this.name);
+        var setItem;
+        switch (ACTUAL_SET) {
+            case 1:
+                setItem = set1List.get(this.name);
+                break;
+            case 2:
+                setItem = set2List.get(this.name);
+                break;
+            default:
+                setItem = set1List.get(this.name);
+                break;
+        }
+
         if (this.rotate/90 < setItem.sides.length) {
             this.top = setItem.sides[this.rotate/90][0];
             this.bot = setItem.sides[this.rotate/90][1];
@@ -67,11 +82,29 @@ class WaveItem {
     }
 
     static getAllSets() {
+        var setName;
+        var setList;
+        switch (ACTUAL_SET) {
+            case 1:
+                setName = set1Names;
+                setList = set1List;
+                break;
+            case 2:
+                setName = set2Names;
+                setList = set2List;
+                break;
+            default:
+                setName = set1Names;
+                setList = set1List;
+                break;
+        }
+
+
         var sets = []
-        for (var i = 0; i < set1Names.length; i++) {
-            sets[i] = new WaveItem(set1Names[i], set1List.get(set1Names[i]).img,
-                set1List.get(set1Names[i]).top, set1List.get(set1Names[i]).bot,
-                set1List.get(set1Names[i]).right, set1List.get(set1Names[i]).left)
+        for (var i = 0; i < setName.length; i++) {
+            sets[i] = new WaveItem(setName[i], setList.get(setName[i]).img,
+                                    setList.get(setName[i]).top, setList.get(setName[i]).bot,
+                                    setList.get(setName[i]).right, setList.get(setName[i]).left)
         }
         return sets;
     }

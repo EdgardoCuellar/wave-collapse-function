@@ -56,7 +56,7 @@ export const set1List = new Map([
         right: 1,
         left: 4,
         img: grass_edge,
-        sides: [[5,1,1,2], [3, 1, 1, 2], [1, 3, 4, 1]]
+        sides: [[5,1,1,2], [3, 1, 2, 1], [1, 3, 4, 1]]
 	}],
 
 	['river_corner', {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { set1List } from "../assets/set1";
+import { set2List } from "../assets/set2";
 import WaveItem from "../objects/WaveItem";
 
 import '../style/MainBlock.css';
@@ -159,8 +159,8 @@ class MainBlock extends Component {
     clickOnBlock(x, y, selected) {
         if (selected !== undefined || this.state.isClicked === false) {
             var matrixBlock = this.state.matrixBlock;
-            matrixBlock[y][x] = new WaveItem(selected, set1List.get(selected).img
-                                ,set1List.get(selected).top, set1List.get(selected).bot, set1List.get(selected).right, set1List.get(selected).left);
+            matrixBlock[y][x] = new WaveItem(selected, set2List.get(selected).img
+                                ,set2List.get(selected).top, set2List.get(selected).bot, set2List.get(selected).right, set2List.get(selected).left);
             this.setState({
                 isClicked: true,
                 matrixBlock: matrixBlock,
