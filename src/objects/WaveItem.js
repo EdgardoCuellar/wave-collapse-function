@@ -56,12 +56,14 @@ class WaveItem {
     }
 
     rotate90() {
-        var temp = this.top;
-        this.top = this.left;
-        this.left = this.bot;
-        this.bot = this.right;
-        this.right = temp;
-        this.rotate = this.rotate + 90;
+        var setItem = set1List.get(this.name);
+        if (this.rotate/90 < setItem.sides.length) {
+            this.top = setItem.sides[this.rotate/90][0];
+            this.bot = setItem.sides[this.rotate/90][1];
+            this.right = setItem.sides[this.rotate/90][2];
+            this.left =setItem.sides[this.rotate/90][3];
+            this.rotate = this.rotate + 90;
+        }
     }
 
     static getAllSets() {

@@ -62,6 +62,9 @@ class MainBlock extends Component {
                     possibilities.push(allSet[i]);
                 }
             }
+            if (possibilities.length === 0) {
+                console.log(x, y, "Right");
+            }
             var rng = Math.floor(Math.random() * possibilities.length);
             matrixBlock[y][x+1] = new WaveItem(possibilities[rng].getName(), possibilities[rng].img
                                 ,possibilities[rng].top, possibilities[rng].bot, possibilities[rng].right, possibilities[rng].left, possibilities[rng].rotate);
@@ -73,6 +76,9 @@ class MainBlock extends Component {
                 if (this.mathAllSides(x-1, y, allSet[i]) === true) {
                     possibilities.push(allSet[i]);
                 }
+            }
+            if (possibilities.length === 0) {
+                console.log(x, y, "Left");
             }
             rng = Math.floor(Math.random() * possibilities.length);
             matrixBlock[y][x-1] = new WaveItem(possibilities[rng].getName(), possibilities[rng].img
@@ -86,6 +92,9 @@ class MainBlock extends Component {
                     possibilities.push(allSet[i]);
                 }
             }
+            if (possibilities.length === 0) {
+                console.log(x, y, "Bot");
+            }
             rng = Math.floor(Math.random() * possibilities.length);
             matrixBlock[y+1][x] = new WaveItem(possibilities[rng].getName(), possibilities[rng].img
                                 ,possibilities[rng].top, possibilities[rng].bot, possibilities[rng].right, possibilities[rng].left, possibilities[rng].rotate);
@@ -97,6 +106,9 @@ class MainBlock extends Component {
                 if (this.mathAllSides(x, y-1, allSet[i]) === true) {
                     possibilities.push(allSet[i]);
                 }
+            }
+            if (possibilities.length === 0) {
+                console.log(x, y, "Top");
             }
             rng = Math.floor(Math.random() * possibilities.length);
             matrixBlock[y-1][x] = new WaveItem(possibilities[rng].getName(), possibilities[rng].img
@@ -145,7 +157,7 @@ class MainBlock extends Component {
     }
 
     clickOnBlock(x, y, selected) {
-        if (selected !== undefined && this.state.isClicked === false) {
+        if (selected !== undefined || this.state.isClicked === false) {
             var matrixBlock = this.state.matrixBlock;
             matrixBlock[y][x] = new WaveItem(selected, set1List.get(selected).img
                                 ,set1List.get(selected).top, set1List.get(selected).bot, set1List.get(selected).right, set1List.get(selected).left);
