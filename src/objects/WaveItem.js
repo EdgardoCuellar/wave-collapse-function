@@ -2,6 +2,7 @@ import { set1Names, set1List} from "../assets/set1";
 import { set2Names, set2List} from "../assets/set2";
 import { set3Names, set3List} from "../assets/set3";
 import { set4Names, set4List} from "../assets/set4";
+import empty from "../assets/empty.png";
 
 
 class WaveItem {
@@ -11,7 +12,7 @@ class WaveItem {
     constructor(name, img, top, bot, right, left, rotate) {
         this.name = name;
         if (img===undefined) {
-            this.img = null;
+            this.img = empty;
         } else {
             this.img = img;
         }

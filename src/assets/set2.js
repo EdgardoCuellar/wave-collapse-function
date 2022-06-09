@@ -1,17 +1,22 @@
 import ground from './set2/ground.png'
 import ground_leave from './set2/ground_leave.png'
+import ground_one_leave from './set2/ground_one_leave.png'
+import ground_three from './set2/ground_three.png'
 import sky from './set2/sky.png'
 import sky_flowers from './set2/sky_flowers.png'
 import sky_leave_duplicate from './set2/sky_leave_duplicate.png'
 import sky_leave_merge from './set2/sky_leave_merge.png'
 import sky_leave_one_duplicate from './set2/sky_leave_one_duplicate.png'
 import sky_cloud from './set2/sky_cloud.png'
+import sky_birds from './set2/sky_birds.png'
 import sky_one_flower from './set2/sky_one_flower.png'
 import ground_full from './set2/ground_full.png'
 
 export const set2Names = [
     'ground',
     'ground_leave',
+    'ground_one_leave',
+    'ground_three',
     'sky',
     'sky_flowers',
     'sky_leave_duplicate',
@@ -20,6 +25,7 @@ export const set2Names = [
     'sky_cloud',
     'sky_one_flower',
     'ground_full',
+    'sky_birds',
 ]
 
 // TOP BOT RIGHT LEFT
@@ -40,12 +46,36 @@ export const set2List = new Map([
         img: ground_leave,
         sides: [[]]
 	}],
+	['ground_one_leave', {
+        top: 4,
+        bot: 10,
+        right: 1,
+        left: 1,
+        img: ground_one_leave,
+        sides: [[]]
+	}],
+	['ground_three', {
+        top: 5,
+        bot: 10,
+        right: 1,
+        left: 1,
+        img: ground_three,
+        sides: [[]]
+	}],
 	['sky', {
         top: 0,
         bot: 0,
         right: 0,
         left: 0,
         img: sky,
+        sides: [[]]
+	}],
+	['sky_birds', {
+        top: 0,
+        bot: 0,
+        right: 0,
+        left: 0,
+        img: sky_birds,
         sides: [[]]
 	}],
 	['sky_flowers', {
