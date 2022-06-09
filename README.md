@@ -2,7 +2,7 @@
 It's a simple react project made for fun, which used the wave collapse function algorithm to generate some patterns/images. It's a 100% pure react project, without all useless libraries, I made it in react to make it easy and avalaible online.\
 Every set is made by hand one photoshop with so much love.
 ### Website
-It's avalaible here: []
+It's avalaible here: https://wave-collapse-function.herokuapp.com/
 ### How it works
 If you want to compile it on your computer, you need react and run this command `npm start`
 ### Some examples
