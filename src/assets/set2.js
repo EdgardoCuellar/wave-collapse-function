@@ -7,6 +7,7 @@ import sky_leave_merge from './set2/sky_leave_merge.png'
 import sky_leave_one_duplicate from './set2/sky_leave_one_duplicate.png'
 import sky_cloud from './set2/sky_cloud.png'
 import sky_one_flower from './set2/sky_one_flower.png'
+import ground_full from './set2/ground_full.png'
 
 export const set2Names = [
     'ground',
@@ -17,7 +18,8 @@ export const set2Names = [
     'sky_leave_merge',
     'sky_leave_one_duplicate',
     'sky_cloud',
-    'sky_one_flower'
+    'sky_one_flower',
+    'ground_full',
 ]
 
 // TOP BOT RIGHT LEFT
@@ -92,6 +94,14 @@ export const set2List = new Map([
         right: 0,
         left: 0,
         img: sky_one_flower,
+        sides: [[]]
+	}],
+	['ground_full', {
+        top: 10,
+        bot: 10,
+        right: 10,
+        left: 10,
+        img: ground_full,
         sides: [[]]
 	}],
 ]);

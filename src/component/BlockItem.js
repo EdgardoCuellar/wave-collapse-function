@@ -5,14 +5,12 @@ class BlockItem extends Component {
 
 
     state = {
-        waveItem: '',
         callBackSelected: ''
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            waveItem: props.waveItem,
             callBackSelected: props.selected
         }
     }
@@ -23,8 +21,8 @@ class BlockItem extends Component {
 
     render() {
         return (
-            <div className='item-container' onClick={(n) => this.selected(this.state.waveItem.getName())}>
-                <img className='item-img' src={this.state.waveItem.getImagePath()} alt="" />
+            <div className='item-container' onClick={(n) => this.selected(this.props.waveItem.getName())}>
+                <img className='item-img' src={this.props.waveItem.getImagePath()} alt="" />
             </div>
         )
     }

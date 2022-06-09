@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { set2List } from "../assets/set2";
 import WaveItem from "../objects/WaveItem";
 
 import '../style/MainBlock.css';
 
 import SelectBar from "./SelectBar";
+
 
 class MainBlock extends Component {
 
@@ -13,23 +13,38 @@ class MainBlock extends Component {
         selected: 'grass',
         matrixBlock: [],
         isClicked: false,
+        selectBar: null,
     }
 
     constructor(props) {
         super(props);
+        this.start(props.N, true);
+    }
+
+    start(gridSize, isConstructor = false) {
         var matrixBlock = [];
-        for (var i = 0;i < props.N;i++) {
+        for (var i = 0;i < gridSize;i++) {
             var lineBlock = [];
-            for (var j = 0;j < props.N;j++) {
+            for (var j = 0;j < gridSize;j++) {
                 lineBlock[j] = new WaveItem();
             }
             matrixBlock[i] = lineBlock;
         }
-        
-        this.state = {
-            matrixBlock: matrixBlock,
-            N: props.N,
-            isClicked: false,
+        var selectBar = <SelectBar selected={(name) => {this.setState({selected: name});}}/>
+        if (isConstructor) {
+            this.state = {
+                matrixBlock: matrixBlock,
+                N: gridSize,
+                isClicked: false,
+                selectBar: selectBar,
+            };
+        } else {
+            this.setState({
+                matrixBlock: matrixBlock,
+                N: gridSize,
+                isClicked: false,
+                selectBar: selectBar,
+            });
         }
     }
 
@@ -49,7 +64,8 @@ class MainBlock extends Component {
             if (xy[1]-1 >= 0 && this.state.matrixBlock[xy[1]-1][xy[0]].getName() === undefined) {
                 tempMatrix.push([xy[0], xy[1]-1]);
             }
-            this.waveFunctionCollapseBlock(xy[0], xy[1], this.state.matrixBlock);
+            
+            this.waveFunctionCollapseBlock(xy[0], xy[1], this.state.matrixBlock);         
         }
     }
 
@@ -61,9 +77,6 @@ class MainBlock extends Component {
                 if (this.mathAllSides(x+1, y, allSet[i]) === true) {
                     possibilities.push(allSet[i]);
                 }
-            }
-            if (possibilities.length === 0) {
-                console.log(x, y, "Right");
             }
             var rng = Math.floor(Math.random() * possibilities.length);
             matrixBlock[y][x+1] = new WaveItem(possibilities[rng].getName(), possibilities[rng].img
@@ -77,9 +90,6 @@ class MainBlock extends Component {
                     possibilities.push(allSet[i]);
                 }
             }
-            if (possibilities.length === 0) {
-                console.log(x, y, "Left");
-            }
             rng = Math.floor(Math.random() * possibilities.length);
             matrixBlock[y][x-1] = new WaveItem(possibilities[rng].getName(), possibilities[rng].img
                                 ,possibilities[rng].top, possibilities[rng].bot, possibilities[rng].right, possibilities[rng].left, possibilities[rng].rotate);
@@ -92,9 +102,6 @@ class MainBlock extends Component {
                     possibilities.push(allSet[i]);
                 }
             }
-            if (possibilities.length === 0) {
-                console.log(x, y, "Bot");
-            }
             rng = Math.floor(Math.random() * possibilities.length);
             matrixBlock[y+1][x] = new WaveItem(possibilities[rng].getName(), possibilities[rng].img
                                 ,possibilities[rng].top, possibilities[rng].bot, possibilities[rng].right, possibilities[rng].left, possibilities[rng].rotate);
@@ -106,9 +113,6 @@ class MainBlock extends Component {
                 if (this.mathAllSides(x, y-1, allSet[i]) === true) {
                     possibilities.push(allSet[i]);
                 }
-            }
-            if (possibilities.length === 0) {
-                console.log(x, y, "Top");
             }
             rng = Math.floor(Math.random() * possibilities.length);
             matrixBlock[y-1][x] = new WaveItem(possibilities[rng].getName(), possibilities[rng].img
@@ -159,8 +163,9 @@ class MainBlock extends Component {
     clickOnBlock(x, y, selected) {
         if (selected !== undefined || this.state.isClicked === false) {
             var matrixBlock = this.state.matrixBlock;
-            matrixBlock[y][x] = new WaveItem(selected, set2List.get(selected).img
-                                ,set2List.get(selected).top, set2List.get(selected).bot, set2List.get(selected).right, set2List.get(selected).left);
+            var actualSetList = WaveItem.getSetList();
+            matrixBlock[y][x] = new WaveItem(selected, actualSetList.get(selected).img
+                                ,actualSetList.get(selected).top, actualSetList.get(selected).bot, actualSetList.get(selected).right, actualSetList.get(selected).left);
             this.setState({
                 isClicked: true,
                 matrixBlock: matrixBlock,
@@ -169,30 +174,52 @@ class MainBlock extends Component {
         }
     }
 
+    handleGridOption(e) {
+        this.start(parseInt(e.target.value), false);
+    }
+
+    handleSet(e) {
+        WaveItem.ACTUAL_SET = parseInt(e.target.value);
+        this.start(this.state.N, false);
+    }
+
     render () {
         var size = 700/ this.state.N;
         return (
             <div className='main-containers'>
+                <div className="options-container">
+                    <select className="option-item-grid" onChange={(e) => this.handleGridOption(e)} value={this.state.N}>
+                        <option value="5">5</option>
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                    <select className="option-item-set" onChange={(e) => this.handleSet(e)}>
+                        <option value="1">Plains</option>
+                        <option value="2">Flowers</option>
+                        <option value="3">Wall</option>
+                        <option value="4">Dicks</option>
+                    </select>
+                    <button className="option-item-restart" onClick={() => this.start(this.state.N, false)}>Restart</button>
+                </div>
                 <div className="blocks-containers">
                     {this.state.matrixBlock.map((line, i) => 
                         <div className="line-containers">
                             {line.map((object, j) => 
                                 <div className='block-containers' onClick={(a, b, s) => this.clickOnBlock(j, i, this.state.selected)}
                                     style={{width: size, height: size}} >
-                                    <img className='block-img' 
+                                    <img className='block-img' alt="" resizeMode="cover"
                                          src={this.state.matrixBlock[i][j].getImagePath()} 
-                                         style={{ transform: 'rotate('+this.state.matrixBlock[i][j].getRotation()+'deg)'}} alt="">
+                                         style={{ transform: 'rotate('+this.state.matrixBlock[i][j].getRotation()+'deg)'}}>
                                     </img>
                                 </div>
                             )}
                         </div>
                     )}
                 </div>
-                <SelectBar 
-                    selected={(name) => {
-                        this.setState({selected: name});
-                    }}>
-                </SelectBar>
+                {this.state.selectBar}
             </div>
         )
     }
