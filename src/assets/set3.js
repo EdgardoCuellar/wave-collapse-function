@@ -1,11 +1,13 @@
 import cross from './set3/cross.png'
 import full from './set3/full.png'
 import line from './set3/line.png'
+import semi_cross from './set3/semi_cross.png'
 
 export const set3Names = [
     'cross',
     'full',
     'line',
+    'semi_cross',
 ]
 
 // TOP BOT RIGHT LEFT
@@ -33,5 +35,13 @@ export const set3List = new Map([
         left: 0,
         img: line,
         sides: [[0, 0, 1, 1]]
+	}],
+	['semi_cross', {
+        top: 0,
+        bot: 1,
+        right: 0,
+        left: 0,
+        img: semi_cross,
+        sides: [[0, 0, 0, 1], [1, 0, 0, 0], [0, 0, 1, 0]]
 	}],
 ]);
